@@ -78,6 +78,15 @@ export default function Home() {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  const servicesRef = useRef(null);
+  const { scrollYProgress: servicesProgress } = useScroll({
+    target: servicesRef,
+    offset: ["start end", "end start"],
+  });
+  const orb1Y = useTransform(servicesProgress, [0, 1], ["0%", "-35%"]);
+  const orb2Y = useTransform(servicesProgress, [0, 1], ["0%", "25%"]);
+  const beamY = useTransform(servicesProgress, [0, 1], ["-60%", "60%"]);
+
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col overflow-x-hidden">
 
@@ -245,9 +254,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services — dark with white cards */}
-      <section id="services" className="py-28 px-6 bg-zinc-900">
-        <div className="max-w-5xl mx-auto">
+      {/* Services — dynamic animated background */}
+      <section id="services" ref={servicesRef} className="py-28 px-6 bg-zinc-950 relative overflow-hidden">
+
+        {/* Parallax orb 1 — top left */}
+        <motion.div
+          style={{ y: orb1Y }}
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-green-700/10 blur-3xl pointer-events-none"
+        />
+
+        {/* Parallax orb 2 — bottom right */}
+        <motion.div
+          style={{ y: orb2Y }}
+          className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-emerald-600/8 blur-3xl pointer-events-none"
+        />
+
+        {/* Animated sweeping light beam */}
+        <motion.div
+          style={{ y: beamY }}
+          className="absolute left-1/2 -translate-x-1/2 w-px h-[120%] bg-gradient-to-b from-transparent via-green-500/20 to-transparent pointer-events-none"
+        />
+
+        {/* Pulsing center glow */}
+        <motion.div
+          animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.12, 0.05] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-green-600/10 blur-3xl pointer-events-none"
+        />
+
+        {/* Dot grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+
+        {/* Top fade from previous white section */}
+        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+
+        <div className="max-w-5xl mx-auto relative z-10">
           <FadeIn className="text-center mb-14">
             <p className="text-green-400 text-sm font-semibold tracking-widest uppercase mb-3">What We Do</p>
             <h2 className="text-3xl md:text-4xl font-bold text-white">Expert Technology Solutions</h2>
