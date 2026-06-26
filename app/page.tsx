@@ -105,11 +105,11 @@ export default function Home() {
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="flex items-center justify-between px-8 py-4 sticky top-0 z-50 backdrop-blur-md transition-shadow duration-300"
+        className="flex items-center justify-between px-8 py-4 fixed top-0 left-0 right-0 z-50 backdrop-blur-md"
         style={{
-          backgroundColor: `rgba(9, 9, 11, ${0.15 + navScrolled * 0.82})`,
-          borderBottom: `1px solid rgba(39, 39, 42, ${navScrolled})`,
-          boxShadow: navScrolled > 0.5 ? `0 1px 24px rgba(0,0,0,${navScrolled * 0.4})` : "none",
+          backgroundColor: `rgba(0, 0, 0, ${0.45 + navScrolled * 0.52})`,
+          borderBottom: `1px solid rgba(255, 255, 255, ${navScrolled * 0.06})`,
+          boxShadow: navScrolled > 0.3 ? `0 2px 32px rgba(0,0,0,${navScrolled * 0.6})` : "none",
         }}
       >
         <span className="text-xl font-bold tracking-tight text-white">
@@ -133,7 +133,7 @@ export default function Home() {
       {/* Hero — dark with parallax */}
       <section
         ref={heroRef}
-        className="relative flex flex-col items-center justify-center text-center px-6 py-44 bg-zinc-950 overflow-hidden min-h-screen"
+        className="relative flex flex-col items-center justify-center text-center px-6 pt-44 pb-44 bg-zinc-950 overflow-hidden min-h-screen"
       >
         {/* Background video */}
         <div className="absolute inset-0 z-0 overflow-hidden">
