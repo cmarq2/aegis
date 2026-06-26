@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, type Variants, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { Compass, Cloud, ShieldCheck, Settings, BarChart3, Code2, type LucideIcon } from "lucide-react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -255,21 +256,26 @@ export default function Home() {
             viewport={{ once: true }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {services.map((s) => (
-              <motion.div
-                key={s.title}
-                variants={fadeUp}
-                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
-                className="bg-white rounded-xl p-6 flex flex-col cursor-default"
-              >
-                <div className="text-3xl mb-4">{s.icon}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{s.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed flex-1">{s.description}</p>
-                <a href="#contact" className="mt-4 text-sm font-semibold text-green-700 hover:text-green-600 transition-colors">
-                  Learn more →
-                </a>
-              </motion.div>
-            ))}
+            {services.map((s) => {
+              const Icon = s.icon;
+              return (
+                <motion.div
+                  key={s.title}
+                  variants={fadeUp}
+                  whileHover={{ y: -6, boxShadow: "0 24px 48px rgba(0,0,0,0.18)" }}
+                  className="bg-white rounded-2xl p-7 flex flex-col cursor-default group border border-gray-100 hover:border-green-200 transition-colors"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-zinc-900 flex items-center justify-center mb-5 group-hover:bg-green-700 transition-colors duration-300">
+                    <Icon size={20} className="text-green-400 group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-base font-bold text-gray-900 mb-2">{s.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed flex-1">{s.description}</p>
+                  <a href="#contact" className="mt-5 text-sm font-semibold text-green-700 hover:text-green-600 transition-colors flex items-center gap-1">
+                    Learn more <span className="group-hover:translate-x-1 inline-block transition-transform">→</span>
+                  </a>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -575,39 +581,39 @@ const trustedOrgs = [
   { type: "Defense", name: "Leidos Holdings" },
 ];
 
-const services = [
+const services: { icon: LucideIcon; title: string; description: string }[] = [
   {
-    icon: "🧭",
+    icon: Compass,
     title: "IT Consulting",
     description:
       "Strategic technology guidance to align your IT infrastructure with business objectives and accelerate your digital transformation roadmap.",
   },
   {
-    icon: "☁️",
+    icon: Cloud,
     title: "Cloud Solutions",
     description:
       "Scalable, secure cloud infrastructure built for performance and cost-efficiency. Migration, management, and optimization across AWS, Azure, and GCP.",
   },
   {
-    icon: "🛡️",
+    icon: ShieldCheck,
     title: "Cybersecurity",
     description:
       "Comprehensive security assessments, monitoring, and threat protection to safeguard your data, systems, and business continuity against evolving threats.",
   },
   {
-    icon: "⚙️",
+    icon: Settings,
     title: "Managed Services",
     description:
       "24/7 proactive monitoring, maintenance, and support so you can focus on your business while we keep your IT environment running flawlessly.",
   },
   {
-    icon: "📊",
+    icon: BarChart3,
     title: "Data Analytics",
     description:
       "Turn raw data into actionable insights with our advanced analytics, business intelligence, and AI-powered reporting solutions built for scale.",
   },
   {
-    icon: "💻",
+    icon: Code2,
     title: "Software Development",
     description:
       "Custom software built precisely to your requirements — from web applications and APIs to enterprise platforms that scale with your business.",
