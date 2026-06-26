@@ -207,8 +207,11 @@ export default function Home() {
       <section className="py-16 px-6 bg-white border-b border-gray-100">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-10">
-              Trusted by 500+ organizations across government, defense, and enterprise
+            <p className="text-center text-2xl font-bold text-gray-900 mb-3">
+              Trusted by 500+ organizations
+            </p>
+            <p className="text-center text-base text-gray-500 mb-10">
+              across government, defense, and enterprise
             </p>
           </FadeIn>
           <motion.div
@@ -223,12 +226,12 @@ export default function Home() {
                 key={org.name}
                 variants={fadeUp}
                 whileHover={{ scale: 1.04, boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}
-                className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm cursor-default"
+                className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-5 py-3 shadow-sm cursor-default"
               >
-                <span className="text-xs font-semibold text-green-700 bg-green-50 border border-green-200 rounded px-2 py-0.5">
+                <span className="text-xs font-bold text-green-700 bg-green-50 border border-green-200 rounded-md px-2.5 py-1 whitespace-nowrap">
                   {org.type}
                 </span>
-                <span className="text-sm font-medium text-gray-700">{org.name}</span>
+                <span className="text-base font-semibold text-gray-900">{org.name}</span>
               </motion.div>
             ))}
           </motion.div>
