@@ -3,6 +3,8 @@
 import { motion, useScroll, useTransform, type Variants, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Compass, Cloud, ShieldCheck, Settings, BarChart3, Code2, Lock, Award, FileSearch, ScrollText, BadgeCheck, Landmark, MapPin, Target, HeartPulse, Banknote, GraduationCap, type LucideIcon } from "lucide-react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -87,48 +89,11 @@ export default function Home() {
   const orb2Y = useTransform(servicesProgress, [0, 1], ["0%", "25%"]);
   const beamY = useTransform(servicesProgress, [0, 1], ["-60%", "60%"]);
 
-  const [navScrolled, setNavScrolled] = useState(0);
-  useEffect(() => {
-    const onScroll = () => {
-      // 0 at top → 1 at 120px, then stays at 1
-      setNavScrolled(Math.min(window.scrollY / 120, 1));
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col overflow-x-hidden">
 
-      {/* Navbar */}
-      <motion.nav
-        initial={{ y: -60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="flex items-center justify-between px-8 py-4 fixed top-0 left-0 right-0 z-50 backdrop-blur-md"
-        style={{
-          backgroundColor: `rgba(0, 0, 0, ${0.45 + navScrolled * 0.52})`,
-          borderBottom: `1px solid rgba(255, 255, 255, ${navScrolled * 0.06})`,
-          boxShadow: navScrolled > 0.3 ? `0 2px 32px rgba(0,0,0,${navScrolled * 0.6})` : "none",
-        }}
-      >
-        <span className="text-xl font-bold tracking-tight text-white">
-          Aegis <span className="text-green-400">Interlink</span>
-        </span>
-        <div className="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-400">
-          <a href="#" className="hover:text-white transition-colors">Home</a>
-          <a href="#services" className="hover:text-white transition-colors">Solutions</a>
-          <a href="#about" className="hover:text-white transition-colors">About</a>
-          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
-          <a href="#careers" className="hover:text-white transition-colors">Careers</a>
-          <a
-            href="/portal"
-            className="bg-green-600 hover:bg-green-500 text-white font-semibold px-5 py-2 rounded-lg transition-colors"
-          >
-            Customer Portal
-          </a>
-        </div>
-      </motion.nav>
+      <Navbar transparent />
 
       {/* Hero — dark with parallax */}
       <section
@@ -674,10 +639,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-800 bg-zinc-950 py-6 px-8 text-center text-zinc-500 text-sm">
-        © {new Date().getFullYear()} Aegis Interlink. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   );
 }
