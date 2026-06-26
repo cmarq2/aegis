@@ -111,21 +111,27 @@ export default function Home() {
         ref={heroRef}
         className="relative flex flex-col items-center justify-center text-center px-6 py-44 bg-zinc-950 overflow-hidden min-h-screen"
       >
-        {/* Parallax background layer */}
-        <motion.div style={{ y: bgY }} className="absolute inset-0 z-0">
-          {/* Grid pattern */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)",
-              backgroundSize: "60px 60px",
-            }}
-          />
-          {/* Glow orbs */}
+        {/* Background video */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/3141210-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay so text stays readable */}
+          <div className="absolute inset-0 bg-zinc-950/70" />
+          {/* Subtle green tint at bottom to blend into next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-zinc-950 to-transparent" />
+        </div>
+
+        {/* Parallax overlay layer */}
+        <motion.div style={{ y: bgY }} className="absolute inset-0 z-0 pointer-events-none">
+          {/* Glow orbs on top of video */}
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-green-600/10 blur-3xl" />
-          <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-emerald-500/8 blur-2xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] rounded-full bg-green-700/10 blur-2xl" />
         </motion.div>
 
         {/* Hero content */}
