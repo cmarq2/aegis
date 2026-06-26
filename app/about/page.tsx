@@ -197,6 +197,49 @@ const TESTIMONIALS = [
   },
 ];
 
+// ── Timeline Item ─────────────────────────────────────────────
+function TimelineItem({ year, event, index }: { year: string; event: string; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <div ref={ref} className="relative pl-10 pb-10 last:pb-0">
+      {/* Dot */}
+      <div className="absolute left-0 top-1 z-10">
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={inView ? { scale: 1, opacity: 1 } : {}}
+          transition={{ delay: index * 0.1, duration: 0.4, type: "spring", stiffness: 220 }}
+          className="relative flex items-center justify-center"
+        >
+          {inView && (
+            <motion.div
+              className="absolute w-6 h-6 rounded-full bg-green-500/20"
+              animate={{ scale: [1, 2.4, 1], opacity: [0.5, 0, 0.5] }}
+              transition={{ repeat: Infinity, duration: 2.8, delay: index * 0.35 }}
+            />
+          )}
+          <div className="w-3.5 h-3.5 rounded-full bg-green-500 border-[3px] border-zinc-950 relative z-10" />
+        </motion.div>
+      </div>
+
+      {/* Content */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ delay: index * 0.1 + 0.15, duration: 0.5, ease: "easeOut" }}
+      >
+        <span className="inline-block text-green-400 text-xs font-black uppercase tracking-[0.18em] mb-2">
+          {year}
+        </span>
+        <div className="bg-zinc-900 border border-zinc-800 rounded-xl px-5 py-4 hover:border-green-800/50 hover:bg-zinc-900/80 transition-all duration-300 group">
+          <p className="text-zinc-300 text-sm leading-relaxed">{event}</p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 // ── Testimonials Carousel ──────────────────────────────────────
 function TestimonialsCarousel() {
   const n = TESTIMONIALS.length;
@@ -491,7 +534,7 @@ export default function AboutPage() {
 
       {/* Timeline */}
       <section className="py-20 px-6 bg-zinc-950 border-t border-zinc-800">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -502,20 +545,22 @@ export default function AboutPage() {
             <p className="text-green-400 text-xs font-bold uppercase tracking-widest mb-3">Our History</p>
             <h2 className="text-3xl md:text-4xl font-black text-white">A Decade of Excellence</h2>
           </motion.div>
-          <div className="relative border-l border-zinc-800 pl-8 space-y-10">
+
+          <div className="relative">
+            {/* Background line */}
+            <div className="absolute left-[6px] top-1 bottom-1 w-px bg-zinc-800" />
+            {/* Animated draw-in line */}
+            <motion.div
+              className="absolute left-[6px] top-1 w-px bg-gradient-to-b from-green-500 via-green-500/60 to-transparent origin-top"
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 2.2, ease: "easeInOut" as const }}
+              style={{ height: "calc(100% - 0.25rem)" }}
+            />
+
             {TIMELINE.map((t, i) => (
-              <motion.div
-                key={t.year}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="relative"
-              >
-                <div className="absolute -left-[2.55rem] w-4 h-4 rounded-full bg-green-600 border-2 border-zinc-950" />
-                <span className="text-green-400 text-xs font-bold uppercase tracking-widest">{t.year}</span>
-                <p className="text-zinc-300 text-sm mt-1 leading-relaxed">{t.event}</p>
-              </motion.div>
+              <TimelineItem key={t.year} year={t.year} event={t.event} index={i} />
             ))}
           </div>
         </div>
