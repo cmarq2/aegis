@@ -158,7 +158,7 @@ const VALUES = [
 ];
 
 const TIMELINE = [
-  { year: "2012", event: "Founded in Washington D.C. with a focus on federal IT infrastructure." },
+  { year: "2012", event: "Founded in Denver, Colorado with a focus on federal IT infrastructure." },
   { year: "2015", event: "Achieved FedRAMP authorization and expanded into state & local government." },
   { year: "2018", event: "Launched managed security services and 24/7 SOC operations." },
   { year: "2020", event: "Attained CMMC Level 2 certification and entered the Defense Industrial Base." },
