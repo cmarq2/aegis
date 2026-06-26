@@ -158,12 +158,17 @@ const VALUES = [
 ];
 
 const TIMELINE = [
-  { year: "2012", event: "Founded in Denver, Colorado with a focus on federal IT infrastructure." },
-  { year: "2015", event: "Achieved FedRAMP authorization and expanded into state & local government." },
-  { year: "2018", event: "Launched managed security services and 24/7 SOC operations." },
-  { year: "2020", event: "Attained CMMC Level 2 certification and entered the Defense Industrial Base." },
-  { year: "2023", event: "Surpassed 500 clients served across government, defense, and enterprise." },
-  { year: "2025", event: "Expanded cloud and AI capabilities with new practices in data analytics and ML." },
+  { year: "2010", event: "Founded in Denver, Colorado as a boutique IT consultancy serving regional enterprises and municipal clients." },
+  { year: "2011", event: "Secured first federal contract and established our Washington D.C. satellite office to serve government clients directly." },
+  { year: "2012", event: "Grew to 25 employees and launched a dedicated network infrastructure practice, delivering enterprise-grade deployments across the Mountain West." },
+  { year: "2014", event: "Opened our cybersecurity division and began offering vulnerability assessments and compliance consulting to regulated industries." },
+  { year: "2015", event: "Achieved FedRAMP authorization and expanded into state and local government, winning our first multi-year managed services contract." },
+  { year: "2017", event: "Crossed 100 clients served and launched a cloud migration practice, establishing partnerships with AWS and Microsoft Azure." },
+  { year: "2018", event: "Launched 24/7 SOC operations and a full managed security services offering, growing the team to over 75 professionals." },
+  { year: "2020", event: "Attained CMMC Level 2 certification and formally entered the Defense Industrial Base, supporting contractors across the country." },
+  { year: "2022", event: "Opened our data analytics and AI practice, delivering business intelligence platforms to enterprise and healthcare clients." },
+  { year: "2023", event: "Surpassed 500 clients served across government, defense, and enterprise — marking a decade of consistent growth." },
+  { year: "2025", event: "Expanded into AI-driven automation, quantum-safe cryptography research, and next-generation cloud-native architecture." },
 ];
 
 const TESTIMONIALS = [
