@@ -274,58 +274,91 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Aegis — WHITE */}
-      <section className="py-28 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <FadeIn className="text-center mb-14">
-            <p className="text-green-700 text-sm font-semibold tracking-widest uppercase mb-3">Why Aegis Interlink</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              Built for Enterprise.<br />Trusted at Scale.
+      {/* Why Aegis — PREMIUM DARK */}
+      <section className="py-32 px-6 bg-zinc-950 relative overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-green-900/20 blur-3xl rounded-full" />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-900/10 blur-3xl rounded-full" />
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
+          />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          {/* Header */}
+          <FadeIn className="text-center mb-20">
+            <span className="inline-flex items-center gap-2 text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-6 border border-green-800 bg-green-950/60 px-5 py-2 rounded-full">
+              Why Aegis Interlink
+            </span>
+            <h2 className="text-5xl md:text-6xl font-black text-white leading-tight tracking-tight">
+              Built for Enterprise.<br />
+              <span className="bg-gradient-to-r from-green-400 via-emerald-300 to-green-400 bg-clip-text text-transparent">
+                Trusted at Scale.
+              </span>
             </h2>
-            <p className="mt-3 text-gray-500 text-base max-w-lg mx-auto">
+            <p className="mt-5 text-zinc-400 text-lg max-w-xl mx-auto leading-relaxed">
               From startups to Fortune 500 companies, we deliver technology that performs when it matters most.
             </p>
           </FadeIn>
+
+          {/* Feature cards */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6"
           >
             {whyUs.map((item) => (
               <motion.div
                 key={item.title}
                 variants={fadeUp}
-                whileHover={{ y: -4 }}
-                className="border border-gray-200 rounded-xl p-6 hover:border-green-500 hover:shadow-md transition-all cursor-default"
+                whileHover={{
+                  y: -6,
+                  boxShadow: "0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(74,222,128,0.25)",
+                }}
+                className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-8 cursor-default overflow-hidden group"
               >
-                <div className="text-2xl mb-3">{item.icon}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
+                {/* Hover top glow line */}
+                <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Icon box */}
+                <div className="w-12 h-12 rounded-xl bg-zinc-800 border border-zinc-700 group-hover:border-green-700 flex items-center justify-center text-2xl mb-6 transition-colors duration-300">
+                  {item.icon}
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Stats strip — dark contrast inside white section */}
+          {/* Stats — unified panel */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            className="grid grid-cols-2 md:grid-cols-4 rounded-2xl overflow-hidden border border-zinc-800"
           >
-            {stats.map((s) => (
+            {stats.map((s, i) => (
               <motion.div
                 key={s.label}
                 variants={fadeUp}
-                whileHover={{ scale: 1.04 }}
-                className="bg-zinc-900 rounded-xl p-6 text-center"
+                className={`bg-zinc-900 px-8 py-10 text-center ${
+                  i < stats.length - 1 ? "border-r border-zinc-800" : ""
+                }`}
               >
-                <div className="text-3xl font-extrabold text-green-400">
+                <div className="text-5xl font-black bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent mb-2">
                   <CountUp to={s.to} suffix={s.suffix} decimals={s.decimals} />
                 </div>
-                <div className="mt-1 text-sm text-zinc-400 font-medium">{s.label}</div>
+                <div className="text-xs text-zinc-500 font-semibold uppercase tracking-widest">{s.label}</div>
               </motion.div>
             ))}
           </motion.div>
