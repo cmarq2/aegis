@@ -87,13 +87,11 @@ export default function Home() {
   const orb2Y = useTransform(servicesProgress, [0, 1], ["0%", "25%"]);
   const beamY = useTransform(servicesProgress, [0, 1], ["-60%", "60%"]);
 
-  const [navVisible, setNavVisible] = useState(true);
-  const lastScrollY = useRef(0);
+  const [navScrolled, setNavScrolled] = useState(0);
   useEffect(() => {
     const onScroll = () => {
-      const y = window.scrollY;
-      setNavVisible(y < lastScrollY.current || y < 60);
-      lastScrollY.current = y;
+      // 0 at top → 1 at 120px, then stays at 1
+      setNavScrolled(Math.min(window.scrollY / 120, 1));
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -105,9 +103,14 @@ export default function Home() {
       {/* Navbar */}
       <motion.nav
         initial={{ y: -60, opacity: 0 }}
-        animate={{ y: navVisible ? 0 : -80, opacity: navVisible ? 1 : 0 }}
-        transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="flex items-center justify-between px-8 py-4 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-md sticky top-0 z-50"
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="flex items-center justify-between px-8 py-4 sticky top-0 z-50 backdrop-blur-md transition-shadow duration-300"
+        style={{
+          backgroundColor: `rgba(9, 9, 11, ${0.15 + navScrolled * 0.82})`,
+          borderBottom: `1px solid rgba(39, 39, 42, ${navScrolled})`,
+          boxShadow: navScrolled > 0.5 ? `0 1px 24px rgba(0,0,0,${navScrolled * 0.4})` : "none",
+        }}
       >
         <span className="text-xl font-bold tracking-tight text-white">
           Aegis <span className="text-green-400">Interlink</span>
