@@ -573,6 +573,36 @@ export default function AboutPage() {
 
       <TestimonialsCarousel />
 
+      {/* CTA */}
+      <section className="py-20 px-6 bg-zinc-950 border-t border-zinc-800 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-green-900/12 blur-3xl rounded-full" />
+        </div>
+        <div className="relative z-10 max-w-2xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-green-400 text-xs font-bold uppercase tracking-[0.2em] mb-4">Ready to Get Started?</p>
+            <h2 className="text-3xl md:text-4xl font-black text-white leading-tight mb-4">
+              Let's Build Something<br />
+              <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">That Lasts</span>
+            </h2>
+            <p className="text-zinc-400 text-base leading-relaxed mb-8">
+              Whether you need a strategic partner, a managed services provider, or a team to solve a specific challenge — we're ready to help. Reach out and let's start the conversation.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-8 py-3.5 rounded-xl transition-colors text-sm"
+            >
+              Get In Contact With Us
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
