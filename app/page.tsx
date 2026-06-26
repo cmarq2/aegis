@@ -577,20 +577,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About — WHITE */}
-      <section id="about" className="py-24 px-6 bg-white">
-        <div className="max-w-3xl mx-auto text-center">
-          <FadeIn>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">About Aegis Interlink</h2>
-            <p className="text-gray-500 text-base leading-relaxed">
-              Aegis Interlink is a full-spectrum IT company dedicated to empowering businesses
-              with the technology they need to compete and grow. From securing your network to
-              building your next application, our team brings expertise, reliability, and a
-              commitment to your success.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
 
       {/* Careers — light */}
       <section id="careers" className="py-24 px-6 bg-zinc-50">
