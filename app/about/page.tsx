@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { ShieldCheck, Users, Zap, Star, Award, Cloud, Shield } from "lucide-react";
+import { ShieldCheck, Users, Zap, Star, Award, Cloud, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -165,6 +165,153 @@ const TIMELINE = [
   { year: "2023", event: "Surpassed 500 clients served across government, defense, and enterprise." },
   { year: "2025", event: "Expanded cloud and AI capabilities with new practices in data analytics and ML." },
 ];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "Aegis Interlink transformed our agency's entire IT infrastructure in under 90 days. Their team's knowledge of federal compliance requirements is unmatched — they made FISMA readiness straightforward for the first time.",
+    name: "Director of Information Technology",
+    org: "U.S. Federal Agency",
+    initials: "DI",
+  },
+  {
+    quote:
+      "We needed a partner who understood both the technical complexity and the operational urgency of our environment. Aegis delivered a zero-trust architecture that met every CMMC requirement without disrupting our operations.",
+    name: "Chief Information Officer",
+    org: "Defense Industrial Base Contractor",
+    initials: "CI",
+  },
+  {
+    quote:
+      "The managed services team at Aegis has been exceptional. Their NOC caught and resolved three potential incidents before our internal team even knew about them. The 99.9% uptime SLA is not marketing — it's real.",
+    name: "VP of Technology Operations",
+    org: "Regional Municipality",
+    initials: "VT",
+  },
+  {
+    quote:
+      "Aegis built our entire data analytics platform from scratch — pipelines, dashboards, and predictive models. Six months in, decisions that used to take weeks of manual reporting now happen in real-time.",
+    name: "Head of Data Strategy",
+    org: "Healthcare Enterprise",
+    initials: "HD",
+  },
+];
+
+// ── Testimonials Carousel ──────────────────────────────────────
+function TestimonialsCarousel() {
+  const n = TESTIMONIALS.length;
+  const [idx, setIdx] = useState(0);
+  const [dir, setDir] = useState(1);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setDir(1);
+      setIdx(i => (i + 1) % n);
+    }, 5500);
+    return () => clearInterval(t);
+  }, [n]);
+
+  const paginate = (d: 1 | -1) => {
+    setDir(d);
+    setIdx(i => (i + d + n) % n);
+  };
+
+  const goTo = (i: number) => {
+    setDir(i > idx ? 1 : -1);
+    setIdx(i);
+  };
+
+  const slideVariants = {
+    enter: (d: number) => ({ x: d > 0 ? 50 : -50, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (d: number) => ({ x: d > 0 ? -50 : 50, opacity: 0 }),
+  };
+
+  const current = TESTIMONIALS[idx];
+
+  return (
+    <section className="py-20 px-6 bg-zinc-900 border-t border-zinc-800">
+      <div className="max-w-3xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <p className="text-green-400 text-xs font-bold uppercase tracking-widest mb-3">Testimonials</p>
+          <h2 className="text-3xl md:text-4xl font-black text-white">What Our Clients Say</h2>
+        </motion.div>
+
+        <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-8 md:p-12 relative overflow-hidden">
+          {/* Decorative quote mark */}
+          <div className="absolute top-6 left-8 text-7xl font-black text-green-900/40 leading-none select-none pointer-events-none">
+            "
+          </div>
+
+          {/* Slide area */}
+          <div className="min-h-[180px] flex flex-col justify-center">
+            <AnimatePresence custom={dir} mode="wait">
+              <motion.div
+                key={idx}
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.38, ease: "easeInOut" as const }}
+              >
+                <blockquote className="text-zinc-300 text-base md:text-lg leading-relaxed mb-8 relative z-10">
+                  &ldquo;{current.quote}&rdquo;
+                </blockquote>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-green-950 border border-green-800 flex items-center justify-center text-green-400 font-black text-sm flex-shrink-0">
+                    {current.initials}
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold text-sm">{current.name}</p>
+                    <p className="text-zinc-500 text-xs mt-0.5">{current.org}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-zinc-800">
+            {/* Dots */}
+            <div className="flex gap-2">
+              {TESTIMONIALS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  className={`rounded-full transition-all duration-300 ${
+                    i === idx ? "w-6 h-2 bg-green-500" : "w-2 h-2 bg-zinc-700 hover:bg-zinc-500"
+                  }`}
+                />
+              ))}
+            </div>
+            {/* Arrows */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => paginate(-1)}
+                className="w-9 h-9 rounded-full border border-zinc-700 hover:border-green-700 hover:text-white text-zinc-400 flex items-center justify-center transition-colors"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                onClick={() => paginate(1)}
+                className="w-9 h-9 rounded-full border border-zinc-700 hover:border-green-700 hover:text-white text-zinc-400 flex items-center justify-center transition-colors"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 // ── Page ───────────────────────────────────────────────────────
 export default function AboutPage() {
@@ -373,6 +520,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <TestimonialsCarousel />
 
       <Footer />
     </div>
