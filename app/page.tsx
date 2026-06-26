@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform, type Variants, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Compass, Cloud, ShieldCheck, Settings, BarChart3, Code2, Lock, Award, FileSearch, ScrollText, BadgeCheck, type LucideIcon } from "lucide-react";
+import { Compass, Cloud, ShieldCheck, Settings, BarChart3, Code2, Lock, Award, FileSearch, ScrollText, BadgeCheck, Landmark, MapPin, Target, HeartPulse, Banknote, GraduationCap, type LucideIcon } from "lucide-react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -87,15 +87,27 @@ export default function Home() {
   const orb2Y = useTransform(servicesProgress, [0, 1], ["0%", "25%"]);
   const beamY = useTransform(servicesProgress, [0, 1], ["-60%", "60%"]);
 
+  const [navVisible, setNavVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setNavVisible(y < lastScrollY.current || y < 60);
+      lastScrollY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col overflow-x-hidden">
 
       {/* Navbar */}
       <motion.nav
         initial={{ y: -60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="flex items-center justify-between px-8 py-4 border-b border-zinc-800 bg-zinc-950 sticky top-0 z-50"
+        animate={{ y: navVisible ? 0 : -80, opacity: navVisible ? 1 : 0 }}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        className="flex items-center justify-between px-8 py-4 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-md sticky top-0 z-50"
       >
         <span className="text-xl font-bold tracking-tight text-white">
           Aegis <span className="text-green-400">Interlink</span>
@@ -504,35 +516,72 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Industries — WHITE */}
-      <section className="py-28 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <FadeIn className="text-center mb-14">
-            <p className="text-green-700 text-sm font-semibold tracking-widest uppercase mb-3">Industries</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Sectors We Serve</h2>
-            <p className="mt-3 text-gray-500 text-base max-w-lg mx-auto">
-              From classified federal environments to commercial enterprise, our solutions are purpose-built for every sector.
+      {/* Industries — PREMIUM */}
+      <section className="py-28 px-6 bg-zinc-950 relative overflow-hidden">
+        {/* Background accent */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-green-900/10 blur-3xl rounded-full" />
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+              backgroundSize: "64px 64px",
+            }}
+          />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <FadeIn className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-5 border border-green-800 bg-green-950/60 px-5 py-2 rounded-full">
+              Industries
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-white">Sectors We Serve</h2>
+            <p className="mt-4 text-zinc-400 text-base max-w-lg mx-auto leading-relaxed">
+              From classified federal environments to commercial enterprise, our solutions are purpose-built for every sector we operate in.
             </p>
           </FadeIn>
+
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
           >
-            {industries.map((ind) => (
-              <motion.div
-                key={ind.title}
-                variants={fadeUp}
-                whileHover={{ y: -5, borderColor: "#16a34a", boxShadow: "0 12px 30px rgba(0,0,0,0.08)" }}
-                className="border border-gray-200 rounded-xl p-6 cursor-default transition-colors"
-              >
-                <div className="text-2xl mb-3">{ind.icon}</div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{ind.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{ind.description}</p>
-              </motion.div>
-            ))}
+            {industries.map((ind, i) => {
+              const Icon = ind.icon;
+              return (
+                <motion.div
+                  key={ind.title}
+                  variants={fadeUp}
+                  whileHover={{
+                    y: -6,
+                    boxShadow: "0 0 0 1px rgba(74,222,128,0.3), 0 24px 48px rgba(0,0,0,0.5)",
+                  }}
+                  className="relative bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden cursor-default group"
+                >
+                  {/* Top green accent bar — expands on hover */}
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green-600 via-emerald-400 to-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+
+                  <div className="p-7">
+                    {/* Index + icon row */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="w-12 h-12 rounded-xl bg-zinc-800 border border-zinc-700 group-hover:border-green-700 group-hover:bg-zinc-800 flex items-center justify-center transition-all duration-300">
+                        <Icon size={22} className="text-zinc-400 group-hover:text-green-400 transition-colors duration-300" strokeWidth={1.5} />
+                      </div>
+                      <span className="text-3xl font-black text-zinc-800 group-hover:text-zinc-700 transition-colors duration-300 select-none">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+
+                    <h3 className="text-base font-bold text-white mb-2 group-hover:text-green-400 transition-colors duration-300">
+                      {ind.title}
+                    </h3>
+                    <p className="text-zinc-500 text-sm leading-relaxed">{ind.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -732,39 +781,39 @@ const certBadges: { icon: LucideIcon; title: string; sub: string }[] = [
   { icon: BadgeCheck,  title: "SOC 2 Type II", sub: "Certified" },
 ];
 
-const industries = [
+const industries: { icon: LucideIcon; title: string; description: string }[] = [
   {
-    icon: "🏛️",
+    icon: Landmark,
     title: "Federal Government",
     description:
       "Supporting civilian agencies, defense departments, and intelligence community partners with classified and unclassified IT solutions.",
   },
   {
-    icon: "🏙️",
+    icon: MapPin,
     title: "State & Local Gov",
     description:
       "Modernizing infrastructure for state agencies, county governments, municipalities, and public works departments across the country.",
   },
   {
-    icon: "🎖️",
+    icon: Target,
     title: "Defense & Intel",
     description:
       "Delivering mission-critical IT for the Defense Industrial Base, cleared contractors, and intelligence community stakeholders.",
   },
   {
-    icon: "🏥",
+    icon: HeartPulse,
     title: "Healthcare",
     description:
       "HIPAA-compliant managed services for hospital networks, VA facilities, HHS contractors, and healthcare technology providers.",
   },
   {
-    icon: "🏦",
+    icon: Banknote,
     title: "Financial Services",
     description:
       "SOX, PCI-DSS, and GLBA-compliant IT operations for banks, credit unions, investment firms, and fintech companies.",
   },
   {
-    icon: "🎓",
+    icon: GraduationCap,
     title: "Education",
     description:
       "Secure, scalable IT for K-12 districts, universities, research institutions, and Department of Education contractors.",
