@@ -48,9 +48,9 @@ export default function ContactPage() {
               <h3 className="text-lg font-bold text-white mb-5">Contact Information</h3>
               <div className="space-y-5">
                 {[
-                  { icon: Mail, label: "Email", value: "contact@aegisinterlink.com" },
+                  { icon: Mail, label: "Email", value: "support@aegisinterlink.com" },
                   { icon: Phone, label: "Phone", value: "+1 (202) 555-0147" },
-                  { icon: MapPin, label: "Headquarters", value: "Washington, D.C." },
+                  { icon: MapPin, label: "Headquarters", value: "Denver, CO" },
                   { icon: Clock, label: "Response Time", value: "Within 1 business day" },
                 ].map((item) => {
                   const Icon = item.icon;
