@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform, type Variants, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Compass, Cloud, ShieldCheck, Settings, BarChart3, Code2, type LucideIcon } from "lucide-react";
+import { Compass, Cloud, ShieldCheck, Settings, BarChart3, Code2, Lock, Award, FileSearch, ScrollText, BadgeCheck, type LucideIcon } from "lucide-react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -413,19 +413,40 @@ export default function Home() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid grid-cols-2 gap-4"
+            className="grid grid-cols-2 sm:grid-cols-3 gap-4"
           >
-            {certBadges.map((b) => (
-              <motion.div
-                key={b.title}
-                variants={fadeUp}
-                whileHover={{ scale: 1.05, borderColor: "#4ade80" }}
-                className="bg-zinc-800 border border-zinc-700 rounded-xl p-5 text-center cursor-default"
-              >
-                <div className="text-green-400 font-bold text-sm">{b.title}</div>
-                <div className="text-zinc-400 text-xs mt-1">{b.sub}</div>
-              </motion.div>
-            ))}
+            {certBadges.map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <motion.div
+                  key={b.title}
+                  variants={fadeUp}
+                  whileHover={{
+                    y: -5,
+                    boxShadow: "0 0 0 1px rgba(74,222,128,0.4), 0 20px 40px rgba(0,0,0,0.4)",
+                  }}
+                  className="relative bg-zinc-900 border border-zinc-700 rounded-2xl p-5 flex flex-col items-center text-center cursor-default overflow-hidden group"
+                >
+                  {/* Top shimmer line on hover */}
+                  <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Icon with pulsing ring */}
+                  <div className="relative mb-4 mt-1">
+                    <motion.div
+                      animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.6, 0.3] }}
+                      transition={{ duration: 3, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
+                      className="absolute inset-0 rounded-full bg-green-500/20 blur-sm"
+                    />
+                    <div className="relative w-12 h-12 rounded-full bg-zinc-800 border border-zinc-600 group-hover:border-green-600 flex items-center justify-center transition-colors duration-300">
+                      <Icon size={20} className="text-green-400" strokeWidth={1.5} />
+                    </div>
+                  </div>
+
+                  <div className="text-white font-bold text-sm leading-tight">{b.title}</div>
+                  <div className="text-zinc-500 text-xs mt-1 font-medium">{b.sub}</div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -663,13 +684,13 @@ const govFeatures = [
   "24/7 NOC with cleared personnel on staff",
 ];
 
-const certBadges = [
-  { title: "FedRAMP", sub: "Authorized" },
-  { title: "FISMA", sub: "High Compliant" },
-  { title: "CMMC", sub: "Level 2 Certified" },
-  { title: "NIST 800-171", sub: "Aligned" },
-  { title: "GSA Schedule", sub: "IT 70 Contract" },
-  { title: "SOC 2 Type II", sub: "Certified" },
+const certBadges: { icon: LucideIcon; title: string; sub: string }[] = [
+  { icon: ShieldCheck, title: "FedRAMP", sub: "Authorized" },
+  { icon: Lock,        title: "FISMA",   sub: "High Compliant" },
+  { icon: Award,       title: "CMMC",    sub: "Level 2 Certified" },
+  { icon: FileSearch,  title: "NIST 800-171", sub: "Aligned" },
+  { icon: ScrollText,  title: "GSA Schedule", sub: "IT 70 Contract" },
+  { icon: BadgeCheck,  title: "SOC 2 Type II", sub: "Certified" },
 ];
 
 const industries = [
