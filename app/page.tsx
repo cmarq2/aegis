@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, type Variants, useInView, useMotionValue, useSpring } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -32,6 +32,38 @@ function FadeIn({
     >
       {children}
     </motion.div>
+  );
+}
+
+function CountUp({
+  to,
+  suffix = "",
+  decimals = 0,
+}: {
+  to: number;
+  suffix?: string;
+  decimals?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const motionVal = useMotionValue(0);
+  const spring = useSpring(motionVal, { stiffness: 40, damping: 15 });
+  const [display, setDisplay] = useState("0");
+
+  useEffect(() => {
+    if (isInView) motionVal.set(to);
+  }, [isInView, motionVal, to]);
+
+  useEffect(() => {
+    return spring.on("change", (v) => {
+      setDisplay(decimals > 0 ? v.toFixed(decimals) : Math.floor(v).toString());
+    });
+  }, [spring, decimals]);
+
+  return (
+    <span ref={ref}>
+      {display}{suffix}
+    </span>
   );
 }
 
@@ -287,7 +319,9 @@ export default function Home() {
                 whileHover={{ scale: 1.04 }}
                 className="bg-zinc-900 rounded-xl p-6 text-center"
               >
-                <div className="text-3xl font-extrabold text-green-400">{s.value}</div>
+                <div className="text-3xl font-extrabold text-green-400">
+                  <CountUp to={s.to} suffix={s.suffix} decimals={s.decimals} />
+                </div>
                 <div className="mt-1 text-sm text-zinc-400 font-medium">{s.label}</div>
               </motion.div>
             ))}
@@ -572,10 +606,10 @@ const whyUs = [
 ];
 
 const stats = [
-  { value: "500+", label: "Clients Served" },
-  { value: "12+", label: "Years of Excellence" },
-  { value: "99.9%", label: "Uptime Guarantee" },
-  { value: "24/7", label: "Expert Support" },
+  { to: 500, suffix: "+", decimals: 0, label: "Clients Served" },
+  { to: 12, suffix: "+", decimals: 0, label: "Years of Excellence" },
+  { to: 99.9, suffix: "%", decimals: 1, label: "Uptime Guarantee" },
+  { to: 24, suffix: "/7", decimals: 0, label: "Expert Support" },
 ];
 
 const govFeatures = [
