@@ -1,21 +1,21 @@
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-gray-900 flex flex-col">
+    <div className="min-h-screen bg-zinc-900 text-white flex flex-col">
 
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-4 border-b border-gray-200 bg-white sticky top-0 z-50">
-        <span className="text-xl font-bold tracking-tight text-gray-900">
-          Aegis <span className="text-green-700">Interlink</span>
+      <nav className="flex items-center justify-between px-8 py-4 border-b border-zinc-700 bg-zinc-900 sticky top-0 z-50">
+        <span className="text-xl font-bold tracking-tight text-white">
+          Aegis <span className="text-green-500">Interlink</span>
         </span>
-        <div className="hidden md:flex items-center gap-7 text-sm font-medium text-gray-600">
-          <a href="#" className="hover:text-gray-900 transition-colors">Home</a>
-          <a href="#services" className="hover:text-gray-900 transition-colors">Solutions</a>
-          <a href="#about" className="hover:text-gray-900 transition-colors">About</a>
-          <a href="#contact" className="hover:text-gray-900 transition-colors">Contact</a>
-          <a href="#careers" className="hover:text-gray-900 transition-colors">Careers</a>
+        <div className="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-400">
+          <a href="#" className="hover:text-white transition-colors">Home</a>
+          <a href="#services" className="hover:text-white transition-colors">Solutions</a>
+          <a href="#about" className="hover:text-white transition-colors">About</a>
+          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+          <a href="#careers" className="hover:text-white transition-colors">Careers</a>
           <a
             href="/portal"
-            className="bg-green-700 hover:bg-green-800 text-white font-semibold px-5 py-2 rounded-lg transition-colors"
+            className="bg-green-700 hover:bg-green-600 text-white font-semibold px-5 py-2 rounded-lg transition-colors"
           >
             Customer Portal
           </a>
@@ -23,15 +23,15 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section className="flex flex-col items-center justify-center text-center px-6 py-36 bg-white">
-        <p className="text-green-700 text-sm font-semibold tracking-widest uppercase mb-4">
+      <section className="flex flex-col items-center justify-center text-center px-6 py-36 bg-zinc-900">
+        <p className="text-green-500 text-sm font-semibold tracking-widest uppercase mb-4">
           Trusted IT Solutions
         </p>
-        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight max-w-3xl text-gray-900">
+        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight max-w-3xl text-white">
           Secure. Connected.{" "}
-          <span className="text-green-700">Always On.</span>
+          <span className="text-green-500">Always On.</span>
         </h1>
-        <p className="mt-6 text-lg text-gray-500 max-w-xl leading-relaxed">
+        <p className="mt-6 text-lg text-zinc-400 max-w-xl leading-relaxed">
           Aegis Interlink delivers end-to-end cybersecurity, networking infrastructure,
           managed IT services, and custom application development — so your business
           runs protected and at full speed.
@@ -39,13 +39,13 @@ export default function Home() {
         <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center">
           <a
             href="#contact"
-            className="bg-green-700 hover:bg-green-800 text-white font-semibold px-8 py-3 rounded-lg text-base transition-colors"
+            className="bg-green-700 hover:bg-green-600 text-white font-semibold px-8 py-3 rounded-lg text-base transition-colors"
           >
             Request a Quote
           </a>
           <a
             href="#services"
-            className="border border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-8 py-3 rounded-lg text-base transition-colors"
+            className="border border-zinc-600 hover:border-zinc-400 text-zinc-300 hover:text-white px-8 py-3 rounded-lg text-base transition-colors"
           >
             Our Solutions
           </a>
@@ -53,21 +53,21 @@ export default function Home() {
       </section>
 
       {/* Trust Bar */}
-      <section className="py-14 px-6 bg-gray-50 border-y border-gray-200">
+      <section className="py-14 px-6 bg-zinc-800 border-y border-zinc-700">
         <div className="max-w-5xl mx-auto">
-          <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
+          <p className="text-center text-sm font-semibold text-zinc-500 uppercase tracking-widest mb-8">
             Trusted by 500+ organizations across government, defense, and enterprise
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {trustedOrgs.map((org) => (
               <div
                 key={org.name}
-                className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm"
+                className="flex items-center gap-2 bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2 shadow-sm"
               >
-                <span className="text-xs font-semibold text-green-700 bg-green-50 border border-green-200 rounded px-2 py-0.5">
+                <span className="text-xs font-semibold text-green-500 bg-green-950 border border-green-800 rounded px-2 py-0.5">
                   {org.type}
                 </span>
-                <span className="text-sm font-medium text-gray-700">{org.name}</span>
+                <span className="text-sm font-medium text-zinc-300">{org.name}</span>
               </div>
             ))}
           </div>
@@ -75,12 +75,12 @@ export default function Home() {
       </section>
 
       {/* What We Do */}
-      <section id="services" className="py-24 px-6 bg-white">
+      <section id="services" className="py-24 px-6 bg-zinc-900">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <p className="text-green-700 text-sm font-semibold tracking-widest uppercase mb-3">What We Do</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Expert Technology Solutions</h2>
-            <p className="mt-3 text-gray-500 text-base max-w-lg mx-auto">
+            <p className="text-green-500 text-sm font-semibold tracking-widest uppercase mb-3">What We Do</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Expert Technology Solutions</h2>
+            <p className="mt-3 text-zinc-400 text-base max-w-lg mx-auto">
               We partner with businesses of all sizes to deliver technology that makes a measurable, lasting difference.
             </p>
           </div>
@@ -88,12 +88,12 @@ export default function Home() {
             {services.map((s) => (
               <div
                 key={s.title}
-                className="bg-white border border-gray-200 rounded-xl p-6 hover:border-green-600 hover:shadow-md transition-all flex flex-col"
+                className="bg-zinc-800 border border-zinc-700 rounded-xl p-6 hover:border-green-600 hover:shadow-lg transition-all flex flex-col"
               >
                 <div className="text-3xl mb-4">{s.icon}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{s.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed flex-1">{s.description}</p>
-                <a href="#contact" className="mt-4 text-sm font-semibold text-green-700 hover:text-green-800 transition-colors">
+                <h3 className="text-lg font-semibold text-white mb-2">{s.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed flex-1">{s.description}</p>
+                <a href="#contact" className="mt-4 text-sm font-semibold text-green-500 hover:text-green-400 transition-colors">
                   Learn more →
                 </a>
               </div>
@@ -103,31 +103,31 @@ export default function Home() {
       </section>
 
       {/* Why Aegis Interlink */}
-      <section className="py-24 px-6 bg-gray-50">
+      <section className="py-24 px-6 bg-zinc-800">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <p className="text-green-700 text-sm font-semibold tracking-widest uppercase mb-3">Why Aegis Interlink</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <p className="text-green-500 text-sm font-semibold tracking-widest uppercase mb-3">Why Aegis Interlink</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
               Built for Enterprise.<br />Trusted at Scale.
             </h2>
-            <p className="mt-3 text-gray-500 text-base max-w-lg mx-auto">
+            <p className="mt-3 text-zinc-400 text-base max-w-lg mx-auto">
               From startups to Fortune 500 companies, we deliver technology that performs when it matters most.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
             {whyUs.map((item) => (
-              <div key={item.title} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-md transition-all">
+              <div key={item.title} className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 hover:shadow-md transition-all">
                 <div className="text-2xl mb-3">{item.icon}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
+                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s) => (
-              <div key={s.label} className="bg-white border border-gray-200 rounded-xl p-6">
-                <div className="text-3xl font-extrabold text-green-700">{s.value}</div>
-                <div className="mt-1 text-sm text-gray-500 font-medium">{s.label}</div>
+              <div key={s.label} className="bg-zinc-900 border border-zinc-700 rounded-xl p-6">
+                <div className="text-3xl font-extrabold text-green-500">{s.value}</div>
+                <div className="mt-1 text-sm text-zinc-400 font-medium">{s.label}</div>
               </div>
             ))}
           </div>
@@ -135,21 +135,21 @@ export default function Home() {
       </section>
 
       {/* Government & Public Sector */}
-      <section className="py-24 px-6 bg-black text-white">
+      <section className="py-24 px-6 bg-zinc-950">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-green-400 text-sm font-semibold tracking-widest uppercase mb-4">Government &amp; Public Sector</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <p className="text-green-500 text-sm font-semibold tracking-widest uppercase mb-4">Government &amp; Public Sector</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Cleared for<br />Mission-Critical Operations
             </h2>
-            <p className="text-gray-400 text-base leading-relaxed mb-6">
+            <p className="text-zinc-400 text-base leading-relaxed mb-6">
               We hold the clearances, certifications, and operational discipline required to serve
               federal, state, and local government agencies at the highest level of security and compliance.
             </p>
-            <ul className="space-y-2 text-sm text-gray-300 mb-8">
+            <ul className="space-y-2 text-sm text-zinc-300 mb-8">
               {govFeatures.map((f) => (
                 <li key={f} className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> {f}
+                  <span className="text-green-500">✓</span> {f}
                 </li>
               ))}
             </ul>
@@ -162,9 +162,9 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {certBadges.map((b) => (
-              <div key={b.title} className="bg-gray-900 border border-gray-700 rounded-xl p-4 text-center hover:border-green-600 transition-colors">
-                <div className="text-green-400 font-bold text-sm">{b.title}</div>
-                <div className="text-gray-400 text-xs mt-1">{b.sub}</div>
+              <div key={b.title} className="bg-zinc-800 border border-zinc-700 rounded-xl p-4 text-center hover:border-green-600 transition-colors">
+                <div className="text-green-500 font-bold text-sm">{b.title}</div>
+                <div className="text-zinc-400 text-xs mt-1">{b.sub}</div>
               </div>
             ))}
           </div>
@@ -172,21 +172,21 @@ export default function Home() {
       </section>
 
       {/* Industries */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-zinc-900">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <p className="text-green-700 text-sm font-semibold tracking-widest uppercase mb-3">Industries</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Sectors We Serve</h2>
-            <p className="mt-3 text-gray-500 text-base max-w-lg mx-auto">
+            <p className="text-green-500 text-sm font-semibold tracking-widest uppercase mb-3">Industries</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Sectors We Serve</h2>
+            <p className="mt-3 text-zinc-400 text-base max-w-lg mx-auto">
               From classified federal environments to commercial enterprise, our solutions are purpose-built for every sector we operate in.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {industries.map((ind) => (
-              <div key={ind.title} className="border border-gray-200 rounded-xl p-6 hover:border-green-600 hover:shadow-md transition-all">
+              <div key={ind.title} className="bg-zinc-800 border border-zinc-700 rounded-xl p-6 hover:border-green-600 hover:shadow-md transition-all">
                 <div className="text-2xl mb-3">{ind.icon}</div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">{ind.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{ind.description}</p>
+                <h3 className="text-base font-semibold text-white mb-2">{ind.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">{ind.description}</p>
               </div>
             ))}
           </div>
@@ -194,26 +194,26 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 px-6 bg-gray-50">
+      <section className="py-24 px-6 bg-zinc-800">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <p className="text-green-700 text-sm font-semibold tracking-widest uppercase mb-3">Client Stories</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">What Our Clients Say</h2>
-            <p className="mt-3 text-gray-500 text-base max-w-lg mx-auto">
+            <p className="text-green-500 text-sm font-semibold tracking-widest uppercase mb-3">Client Stories</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">What Our Clients Say</h2>
+            <p className="mt-3 text-zinc-400 text-base max-w-lg mx-auto">
               From federal agencies to Fortune 500 companies — here's what organizations trust us to deliver.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <div key={t.name} className="bg-white border border-gray-200 rounded-xl p-6 flex flex-col">
-                <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-6">"{t.quote}"</p>
+              <div key={t.name} className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 flex flex-col">
+                <p className="text-zinc-400 text-sm leading-relaxed flex-1 mb-6">"{t.quote}"</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                     {t.initials}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-gray-900">{t.name}</div>
-                    <div className="text-xs text-gray-500">{t.role}</div>
+                    <div className="text-sm font-semibold text-white">{t.name}</div>
+                    <div className="text-xs text-zinc-500">{t.role}</div>
                   </div>
                 </div>
               </div>
@@ -223,10 +223,10 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <section id="about" className="py-24 px-6 bg-white">
+      <section id="about" className="py-24 px-6 bg-zinc-900">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">About Aegis Interlink</h2>
-          <p className="text-gray-500 text-base leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">About Aegis Interlink</h2>
+          <p className="text-zinc-400 text-base leading-relaxed">
             Aegis Interlink is a full-spectrum IT company dedicated to empowering businesses
             with the technology they need to compete and grow. From securing your network to
             building your next application, our team brings expertise, reliability, and a
@@ -236,16 +236,16 @@ export default function Home() {
       </section>
 
       {/* Careers */}
-      <section id="careers" className="py-24 px-6 bg-gray-50">
+      <section id="careers" className="py-24 px-6 bg-zinc-800">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Join Our Team</h2>
-          <p className="text-gray-500 text-base mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Join Our Team</h2>
+          <p className="text-zinc-400 text-base mb-8">
             We're always looking for talented engineers, consultants, and professionals
             who are passionate about technology. Come build the future with us.
           </p>
           <a
             href="mailto:careers@aegisinterlink.com"
-            className="inline-block border border-green-700 text-green-700 hover:bg-green-700 hover:text-white font-semibold px-8 py-3 rounded-lg text-base transition-colors"
+            className="inline-block border border-green-700 text-green-500 hover:bg-green-700 hover:text-white font-semibold px-8 py-3 rounded-lg text-base transition-colors"
           >
             View Open Positions
           </a>
@@ -253,10 +253,10 @@ export default function Home() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-24 px-6 bg-black text-white text-center">
+      <section id="contact" className="py-24 px-6 bg-zinc-950 text-center">
         <div className="max-w-xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to get started?</h2>
-          <p className="text-gray-400 mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to get started?</h2>
+          <p className="text-zinc-400 mb-8">
             Tell us about your project and we'll get back to you within one business day.
           </p>
           <a
@@ -269,7 +269,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white py-6 px-8 text-center text-gray-400 text-sm">
+      <footer className="border-t border-zinc-700 bg-zinc-900 py-6 px-8 text-center text-zinc-500 text-sm">
         © {new Date().getFullYear()} Aegis Interlink. All rights reserved.
       </footer>
     </div>
