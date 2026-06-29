@@ -152,7 +152,7 @@ export const allRoles: RoleData[] = [
     type: "Full-time",
     location: "Remote / USA",
     level: "Junior",
-    salary: "$95,000 – $220,000",
+    salary: "$95,000 – $120,000",
     overview:
       "Aegis Interlink is looking for motivated entry-level Software Engineers to join our growing development team. This is a fantastic opportunity to kick-start your career building real-world applications for government and enterprise clients, with direct mentorship from senior engineers and a clear path for rapid growth.",
     responsibilities: [
