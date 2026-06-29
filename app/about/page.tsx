@@ -389,7 +389,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-5xl md:text-6xl font-black text-white leading-tight mb-5"
+            className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-5"
           >
             The People Powering<br />
             <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">

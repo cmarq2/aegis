@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Clock } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -44,7 +44,7 @@ export default function ContactPage() {
           <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="inline-flex items-center text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-5 border border-green-800 bg-green-950/60 px-5 py-2 rounded-full">
             Get In Touch
           </motion.span>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-5xl md:text-6xl font-black text-white leading-tight mb-5">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-5">
             Let's Build Something<br />
             <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">Together</span>
           </motion.h1>
@@ -65,7 +65,6 @@ export default function ContactPage() {
               <div className="space-y-5">
                 {[
                   { icon: Mail, label: "Email", value: "support@aegisinterlink.com" },
-                  { icon: Phone, label: "Phone", value: "+1 (202) 555-0147" },
                   { icon: MapPin, label: "Headquarters", value: "Denver, CO" },
                   { icon: Clock, label: "Response Time", value: "Within 1 business day" },
                 ].map((item) => {

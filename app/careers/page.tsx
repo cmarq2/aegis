@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Code2, Cloud, BarChart3, Users, Zap, Heart, Globe } from "lucide-react";
+import { ShieldCheck, Code2, Cloud, BarChart3, Users, Zap, Heart, Globe, MapPin, ArrowRight, Headphones } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -12,39 +12,51 @@ const benefits = [
   { icon: Globe, title: "Mission-Driven Work", description: "Serve clients at the highest levels of government and industry — work that actually matters." },
 ];
 
-const openings: { department: string; icon: typeof ShieldCheck; roles: { title: string; type: string; location: string }[] }[] = [
+const levelColors: Record<string, string> = {
+  Senior: "text-emerald-400 bg-emerald-950/60 border-emerald-800/50",
+  Mid: "text-sky-400 bg-sky-950/60 border-sky-800/50",
+  Lead: "text-amber-400 bg-amber-950/60 border-amber-800/50",
+  Junior: "text-violet-400 bg-violet-950/60 border-violet-800/50",
+};
+
+const openings = [
   {
     department: "Cybersecurity",
     icon: ShieldCheck,
     roles: [
-      { title: "Senior Penetration Tester", type: "Full-time", location: "Washington, D.C. / Remote" },
-      { title: "SOC Analyst (Tier 2)", type: "Full-time", location: "Washington, D.C." },
-      { title: "Cloud Security Engineer", type: "Full-time", location: "Remote" },
+      { slug: "soc-analyst-tier-2", title: "SOC Analyst (Tier 2)", type: "Full-time", location: "Remote / USA", level: "Mid", salary: "$90K–$115K" },
+      { slug: "cloud-security-engineer", title: "Cloud Security Engineer", type: "Full-time", location: "Remote / USA", level: "Senior", salary: "$125K–$155K" },
     ],
   },
   {
     department: "Software Development",
     icon: Code2,
     roles: [
-      { title: "Full-Stack Engineer (Next.js / Node)", type: "Full-time", location: "Remote" },
-      { title: "DevSecOps Engineer", type: "Full-time", location: "Hybrid — D.C. area" },
-      { title: "Mobile Developer (React Native)", type: "Contract", location: "Remote" },
+      { slug: "full-stack-engineer", title: "Full-Stack Engineer (Next.js / Node)", type: "Full-time", location: "Remote / USA", level: "Mid", salary: "$110K–$140K" },
+      { slug: "devsecops-engineer", title: "DevSecOps Engineer", type: "Full-time", location: "Remote / USA", level: "Senior", salary: "$120K–$150K" },
+      { slug: "software-engineer-entry-level", title: "Software Engineer (Entry Level)", type: "Full-time", location: "Remote / USA", level: "Junior", salary: "$95K–$120K" },
     ],
   },
   {
     department: "Cloud & Infrastructure",
     icon: Cloud,
     roles: [
-      { title: "Cloud Architect (AWS/Azure)", type: "Full-time", location: "Remote" },
-      { title: "Infrastructure Engineer", type: "Full-time", location: "Washington, D.C." },
+      { slug: "cloud-architect", title: "Cloud Architect (AWS/Azure)", type: "Full-time", location: "Remote / USA", level: "Lead", salary: "$145K–$185K" },
     ],
   },
   {
     department: "Data & Analytics",
     icon: BarChart3,
     roles: [
-      { title: "Data Engineer", type: "Full-time", location: "Remote" },
-      { title: "ML/AI Solutions Architect", type: "Full-time", location: "Hybrid — D.C. area" },
+      { slug: "ml-ai-solutions-architect", title: "ML/AI Solutions Architect", type: "Full-time", location: "Remote / USA", level: "Lead", salary: "$150K–$190K" },
+    ],
+  },
+  {
+    department: "Managed IT",
+    icon: Headphones,
+    roles: [
+      { slug: "technical-support-representative", title: "Technical Support Representative", type: "Full-time", location: "Remote / USA", level: "Junior", salary: "$55K–$70K" },
+      { slug: "tier-2-help-desk", title: "Tier 2 Help Desk Technician", type: "Full-time", location: "Remote / USA", level: "Mid", salary: "$65K–$85K" },
     ],
   },
 ];
@@ -63,7 +75,7 @@ export default function CareersPage() {
           <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="inline-flex items-center text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-5 border border-green-800 bg-green-950/60 px-5 py-2 rounded-full">
             We're Hiring
           </motion.span>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-5xl md:text-6xl font-black text-white leading-tight mb-5">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-5">
             Build the Future of<br />
             <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">Enterprise Technology</span>
           </motion.h1>
@@ -118,37 +130,92 @@ export default function CareersPage() {
       </section>
 
       {/* Open positions */}
-      <section className="py-20 px-6 bg-zinc-900">
-        <div className="max-w-5xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-12">
+      <section className="py-20 px-6 bg-zinc-900 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+        <div className="max-w-5xl mx-auto relative z-10">
+          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-14">
             <p className="text-green-400 text-xs font-bold uppercase tracking-widest mb-3">Open Positions</p>
             <h2 className="text-3xl md:text-4xl font-black text-white">Find Your Role</h2>
+            <p className="text-zinc-500 text-sm mt-3">
+              {openings.reduce((sum, d) => sum + d.roles.length, 0)} positions across {openings.length} departments
+            </p>
           </motion.div>
-          <div className="space-y-6">
-            {openings.map((dept, i) => {
+
+          <div className="space-y-10">
+            {openings.map((dept, deptIdx) => {
               const Icon = dept.icon;
               return (
-                <motion.div key={dept.department} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }} viewport={{ once: true }} className="bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden">
-                  <div className="flex items-center gap-3 px-7 py-5 border-b border-zinc-800">
-                    <div className="w-9 h-9 rounded-lg bg-zinc-800 flex items-center justify-center">
-                      <Icon size={16} className="text-green-400" strokeWidth={1.5} />
-                    </div>
-                    <h3 className="font-bold text-white">{dept.department}</h3>
-                  </div>
-                  <div className="divide-y divide-zinc-800/60">
-                    {dept.roles.map((role) => (
-                      <div key={role.title} className="flex flex-col sm:flex-row sm:items-center justify-between px-7 py-4 hover:bg-zinc-800/40 transition-colors group gap-3">
-                        <div>
-                          <p className="text-white font-semibold text-sm">{role.title}</p>
-                          <p className="text-zinc-500 text-xs mt-0.5">{role.location}</p>
-                        </div>
-                        <div className="flex items-center gap-3 flex-shrink-0">
-                          <span className="text-xs bg-zinc-800 border border-zinc-700 text-zinc-400 px-3 py-1 rounded-full">{role.type}</span>
-                          <a href="/contact" className="text-xs font-semibold text-green-400 hover:text-green-300 transition-colors border border-green-800 bg-green-950/40 px-4 py-1.5 rounded-full group-hover:border-green-600">
-                            Apply
-                          </a>
-                        </div>
+                <motion.div
+                  key={dept.department}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, delay: deptIdx * 0.07 }}
+                  viewport={{ once: true }}
+                >
+                  {/* Department header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+                        <Icon size={18} className="text-green-400" strokeWidth={1.5} />
                       </div>
+                      <div>
+                        <h3 className="text-white font-black text-base">{dept.department}</h3>
+                        <p className="text-zinc-600 text-xs">{dept.roles.length} open position{dept.roles.length !== 1 ? "s" : ""}</p>
+                      </div>
+                    </div>
+                    <span className="text-green-400 text-xs font-black bg-green-950/50 border border-green-800/50 w-7 h-7 rounded-full flex items-center justify-center">
+                      {dept.roles.length}
+                    </span>
+                  </div>
+
+                  {/* Gradient divider */}
+                  <div className="h-px bg-gradient-to-r from-green-800/60 via-zinc-700 to-transparent mb-4" />
+
+                  {/* Role cards */}
+                  <div className="space-y-3">
+                    {dept.roles.map((role, roleIdx) => (
+                      <motion.div
+                        key={role.slug}
+                        initial={{ opacity: 0, x: -16 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: deptIdx * 0.07 + roleIdx * 0.06 }}
+                        viewport={{ once: true }}
+                        className="group relative bg-zinc-950 border border-zinc-800 hover:border-zinc-700 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-black/40"
+                      >
+                        {/* Left accent line */}
+                        <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between px-5 py-4 gap-4 pl-6">
+                          <div>
+                            <div className="flex items-center gap-2 mb-1.5">
+                              <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${levelColors[role.level] ?? levelColors.Mid}`}>
+                                {role.level}
+                              </span>
+                            </div>
+                            <h4 className="text-white font-bold text-sm group-hover:text-green-400 transition-colors duration-200">
+                              {role.title}
+                            </h4>
+                            <div className="flex flex-wrap items-center gap-3 mt-1.5">
+                              <span className="text-zinc-500 text-xs flex items-center gap-1">
+                                <MapPin size={11} /> {role.location}
+                              </span>
+                              <span className="text-zinc-600 text-xs font-medium">{role.salary}</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-3 flex-shrink-0">
+                            <span className="text-xs bg-zinc-800/80 border border-zinc-700 text-zinc-400 px-3 py-1.5 rounded-full whitespace-nowrap">
+                              {role.type}
+                            </span>
+                            <a
+                              href={`/careers/apply/${role.slug}`}
+                              className="flex items-center gap-1.5 text-xs font-bold text-white bg-green-700 hover:bg-green-600 px-4 py-2 rounded-lg transition-all duration-200 group/btn whitespace-nowrap"
+                            >
+                              Apply
+                              <ArrowRight size={13} className="transition-transform group-hover/btn:translate-x-0.5" />
+                            </a>
+                          </div>
+                        </div>
+                      </motion.div>
                     ))}
                   </div>
                 </motion.div>

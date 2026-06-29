@@ -100,26 +100,37 @@ export default function Home() {
         ref={heroRef}
         className="relative flex flex-col items-center justify-center text-center px-6 pt-44 pb-44 bg-zinc-950 overflow-hidden min-h-screen"
       >
-        {/* Background video */}
+        {/* Background video — desktop only (file is 53 MB 4K, too large for mobile) */}
         <div className="absolute inset-0 z-0 overflow-hidden">
+          {/* Mobile video — 720p compressed */}
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="absolute inset-0 w-full h-full object-cover"
+            onLoadedMetadata={(e) => { (e.target as HTMLVideoElement).playbackRate = 1.75; }}
+            className="md:hidden absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/hero-mobile.mp4" type="video/mp4" />
+          </video>
+          {/* Desktop video — 4K */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="hidden md:block absolute inset-0 w-full h-full object-cover"
           >
             <source src="/3141210-uhd_3840_2160_25fps.mp4" type="video/mp4" />
           </video>
-          {/* Dark overlay so text stays readable */}
-          <div className="absolute inset-0 bg-zinc-950/70" />
-          {/* Subtle green tint at bottom to blend into next section */}
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-zinc-950/80" />
+          {/* Bottom fade */}
           <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-zinc-950 to-transparent" />
         </div>
 
         {/* Parallax overlay layer */}
         <motion.div style={{ y: bgY }} className="absolute inset-0 z-0 pointer-events-none">
-          {/* Glow orbs on top of video */}
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-green-600/10 blur-3xl" />
         </motion.div>
 
@@ -138,10 +149,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.6 }}
-            className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight max-w-4xl text-white"
+            className="text-3xl sm:text-5xl md:text-7xl font-extrabold leading-tight tracking-tight max-w-4xl text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.8)]"
           >
             Secure. Connected.{" "}
-            <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent [text-shadow:none]">
               Always On.
             </span>
           </motion.h1>
@@ -150,7 +161,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="mt-6 text-lg text-zinc-400 max-w-xl leading-relaxed"
+            className="mt-6 text-lg text-zinc-200 max-w-xl leading-relaxed [text-shadow:0_1px_12px_rgba(0,0,0,0.9)]"
           >
             Aegis Interlink delivers end-to-end cybersecurity, networking infrastructure,
             managed IT services, and custom application development — so your business
@@ -164,7 +175,7 @@ export default function Home() {
             className="mt-10 flex flex-col sm:flex-row gap-4 items-center"
           >
             <motion.a
-              href="#contact"
+              href="/contact"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               className="bg-green-600 hover:bg-green-500 text-white font-semibold px-8 py-3 rounded-lg text-base transition-colors shadow-lg shadow-green-900/30"
@@ -215,19 +226,19 @@ export default function Home() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-3"
+            className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-3"
           >
-            {trustedOrgs.map((org) => (
+            {trustedOrgs.map((org, i) => (
               <motion.div
                 key={org.name}
                 variants={fadeUp}
                 whileHover={{ scale: 1.04, boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}
-                className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-5 py-3 shadow-sm cursor-default"
+                className={`flex items-center gap-2 sm:gap-3 bg-white border border-gray-200 rounded-xl px-3 sm:px-5 py-3 shadow-sm cursor-default ${i >= 6 ? "col-span-2 justify-center" : ""}`}
               >
-                <span className="text-xs font-bold text-green-700 bg-green-50 border border-green-200 rounded-md px-2.5 py-1 whitespace-nowrap">
+                <span className="text-xs font-bold text-green-700 bg-green-50 border border-green-200 rounded-md px-2 sm:px-2.5 py-1 whitespace-nowrap flex-shrink-0">
                   {org.type}
                 </span>
-                <span className="text-base font-semibold text-gray-900">{org.name}</span>
+                <span className="text-sm sm:text-base font-semibold text-gray-900 leading-tight">{org.name}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -335,7 +346,7 @@ export default function Home() {
             <span className="inline-flex items-center gap-2 text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-6 border border-green-800 bg-green-950/60 px-5 py-2 rounded-full">
               Why Aegis Interlink
             </span>
-            <h2 className="text-5xl md:text-6xl font-black text-white leading-tight tracking-tight">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight tracking-tight">
               Built for Enterprise.<br />
               <span className="bg-gradient-to-r from-green-400 via-emerald-300 to-green-400 bg-clip-text text-transparent">
                 Trusted at Scale.
@@ -390,9 +401,9 @@ export default function Home() {
               <motion.div
                 key={s.label}
                 variants={fadeUp}
-                className={`bg-zinc-900 px-8 py-10 text-center ${
-                  i < stats.length - 1 ? "border-r border-zinc-800" : ""
-                }`}
+                className={`bg-zinc-900 px-4 sm:px-8 py-8 sm:py-10 text-center border-zinc-800 ${
+                  i < stats.length - 1 ? "md:border-r" : ""
+                } ${i < 2 ? "border-b md:border-b-0" : ""}`}
               >
                 <div className="text-5xl font-black bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent mb-2">
                   <CountUp to={s.to} suffix={s.suffix} decimals={s.decimals} />
@@ -605,7 +616,7 @@ export default function Home() {
               who are passionate about technology. Come build the future with us.
             </p>
             <motion.a
-              href="mailto:careers@aegisinterlink.com"
+              href="/careers"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               className="inline-block border-2 border-green-700 text-green-700 hover:bg-green-700 hover:text-white font-semibold px-8 py-3 rounded-lg text-base transition-colors"
@@ -645,14 +656,14 @@ export default function Home() {
 }
 
 const trustedOrgs = [
-  { type: "Federal", name: "U.S. Department of Defense" },
-  { type: "Federal", name: "Dept. of Homeland Security" },
-  { type: "Federal", name: "General Services Administration" },
-  { type: "State", name: "State of Virginia" },
-  { type: "State", name: "Texas Dept. of Transportation" },
-  { type: "Local", name: "County of San Diego" },
-  { type: "Defense", name: "Northrop Grumman" },
   { type: "Defense", name: "Leidos Holdings" },
+  { type: "Defense", name: "Northrop Grumman" },
+  { type: "State",   name: "State of Virginia" },
+  { type: "Local",   name: "County of San Diego" },
+  { type: "Federal", name: "Dept. of Homeland Security" },
+  { type: "Federal", name: "U.S. Department of Defense" },
+  { type: "State",   name: "Texas Dept. of Transportation" },
+  { type: "Federal", name: "General Services Administration" },
 ];
 
 const services: { icon: LucideIcon; title: string; description: string }[] = [
