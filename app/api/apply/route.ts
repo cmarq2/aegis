@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
-
   let formData: FormData;
   try {
     formData = await req.formData();
@@ -64,11 +62,17 @@ export async function POST(req: Request) {
     </div>
   `;
 
-  type EmailPayload = Parameters<typeof resend.emails.send>[0];
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
+  });
 
-  const payload: EmailPayload = {
-    from: process.env.RESEND_FROM_EMAIL ?? "Aegis Interlink <noreply@aegisinterlink.com>",
-    to: [process.env.CONTACT_TO_EMAIL ?? "support@aegisinterlink.com"],
+  const mailOptions: nodemailer.SendMailOptions = {
+    from: `"Aegis Interlink Careers" <${process.env.GMAIL_USER}>`,
+    to: process.env.CONTACT_TO_EMAIL ?? "support@aegisinterlink.com",
     replyTo: email,
     subject: `Application: ${roleTitle} — ${name}`,
     html,
@@ -76,13 +80,13 @@ export async function POST(req: Request) {
 
   if (resumeFile && resumeFile.size > 0) {
     const buffer = Buffer.from(await resumeFile.arrayBuffer());
-    payload.attachments = [{ filename: resumeFile.name, content: buffer }];
+    mailOptions.attachments = [{ filename: resumeFile.name, content: buffer }];
   }
 
-  const { error } = await resend.emails.send(payload);
-
-  if (error) {
-    console.error("Resend error:", error);
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (err) {
+    console.error("Nodemailer error:", err);
     return NextResponse.json({ error: "Failed to send application." }, { status: 500 });
   }
 
