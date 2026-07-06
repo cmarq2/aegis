@@ -48,14 +48,14 @@ export const allRoles: RoleData[] = [
   },
   {
     slug: "soc-analyst-tier-2",
-    title: "SOC Analyst (Tier 2)",
+    title: "SOC Analyst",
     department: "Cybersecurity",
     type: "Full-time",
     location: "Remote / USA",
     level: "Mid",
     salary: "$90,000 – $115,000",
     overview:
-      "As a Tier 2 SOC Analyst at Aegis Interlink, you will be a key responder in our 24/7 Security Operations Center — investigating escalated alerts, conducting threat hunting, and driving incident response for federal and enterprise clients across SIEM, EDR, and threat intelligence platforms.",
+      "As a SOC Analyst at Aegis Interlink, you will be a key responder in our 24/7 Security Operations Center — investigating escalated alerts, conducting threat hunting, and driving incident response for federal and enterprise clients across SIEM, EDR, and threat intelligence platforms.",
     responsibilities: [
       "Investigate and triage Tier 1 escalations with speed and precision",
       "Conduct proactive threat hunting across SIEM, EDR, and threat intel platforms",

@@ -24,7 +24,7 @@ const openings = [
     department: "Cybersecurity",
     icon: ShieldCheck,
     roles: [
-      { slug: "soc-analyst-tier-2", title: "SOC Analyst (Tier 2)", type: "Full-time", location: "Remote / USA", level: "Mid", salary: "$90K–$115K" },
+      { slug: "soc-analyst-tier-2", title: "SOC Analyst", type: "Full-time", location: "Remote / USA", level: "Mid", salary: "$90K–$115K" },
       { slug: "cloud-security-engineer", title: "Cloud Security Engineer", type: "Full-time", location: "Remote / USA", level: "Senior", salary: "$125K–$155K" },
     ],
   },
