@@ -74,7 +74,7 @@ export async function POST(req: Request) {
 
   const mailOptions: nodemailer.SendMailOptions = {
     from: `"Aegis Interlink Careers" <${process.env.GMAIL_USER}>`,
-    to: process.env.CONTACT_TO_EMAIL ?? "support@aegisinterlink.com",
+    to: process.env.APPLY_TO_EMAIL ?? "kayla@aegisinterlink.com",
     replyTo: email,
     subject: `Application: ${roleTitle} — ${name}`,
     html,
