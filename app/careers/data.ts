@@ -409,6 +409,39 @@ export const allRoles: RoleData[] = [
       "Ability to obtain a government security clearance",
     ],
   },
+  {
+    slug: "system-administrator",
+    title: "System Administrator",
+    department: "Managed IT",
+    type: "Full-time",
+    location: "Remote / USA",
+    level: "Mid",
+    salary: "$80,000 – $105,000",
+    overview:
+      "Aegis Interlink is looking for a System Administrator to manage and maintain the servers, systems, and cloud infrastructure that keep our managed IT clients running smoothly. You will work across on-premise and cloud environments, with hands-on responsibility for both AWS and Azure resources.",
+    responsibilities: [
+      "Administer and maintain Windows and Linux server environments",
+      "Manage cloud infrastructure and resources across AWS and Azure",
+      "Perform system monitoring, patching, and routine maintenance",
+      "Manage Active Directory, DNS, DHCP, and group policy",
+      "Support backup, disaster recovery, and business continuity processes",
+      "Troubleshoot escalated system and infrastructure issues",
+    ],
+    requirements: [
+      "3+ years of system administration experience",
+      "Required hands-on experience with AWS and Microsoft Azure",
+      "Proficiency with Windows Server and Linux administration",
+      "Experience with Active Directory, Group Policy, and DNS/DHCP",
+      "Familiarity with scripting for automation (PowerShell or Bash)",
+      "Strong troubleshooting and documentation skills",
+    ],
+    niceToHave: [
+      "AWS or Azure administrator certification",
+      "Experience with virtualization platforms (VMware, Hyper-V)",
+      "Familiarity with IaC tools (Terraform, ARM/Bicep)",
+      "Ability to obtain a government security clearance",
+    ],
+  },
 ];
 
 export function getRoleBySlug(slug: string): RoleData | undefined {
