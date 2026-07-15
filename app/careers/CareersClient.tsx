@@ -34,7 +34,6 @@ const openings = [
     roles: [
       { slug: "full-stack-engineer", title: "Full-Stack Engineer (Next.js / Node)", type: "Full-time", location: "Remote / USA", level: "Mid", salary: "$110K–$140K" },
       { slug: "devsecops-engineer", title: "DevSecOps Engineer", type: "Full-time", location: "Remote / USA", level: "Senior", salary: "$120K–$150K" },
-      { slug: "software-engineer-entry-level", title: "Software Engineer (Entry Level)", type: "Full-time", location: "Remote / USA", level: "Junior", salary: "$95K–$120K" },
     ],
   },
   {
