@@ -56,7 +56,7 @@ const openings = [
     roles: [
       { slug: "technical-support-representative", title: "Technical Support Representative", type: "Full-time", location: "Remote / USA", level: "Junior", salary: "$55K–$70K" },
       { slug: "tier-2-help-desk", title: "Tier 2 Help Desk Technician", type: "Full-time", location: "Remote / USA", level: "Mid", salary: "$65K–$85K" },
-      { slug: "system-administrator", title: "System Administrator", type: "Full-time", location: "Remote / USA", level: "Mid", salary: "$80K–$105K" },
+      { slug: "system-administrator", title: "System Administrator", type: "Full-time", location: "Remote / USA", level: "Mid", salary: "$85K–$115K" },
     ],
   },
 ];

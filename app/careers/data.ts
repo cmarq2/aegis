@@ -416,7 +416,7 @@ export const allRoles: RoleData[] = [
     type: "Full-time",
     location: "Remote / USA",
     level: "Mid",
-    salary: "$80,000 – $105,000",
+    salary: "$85,000 – $115,000",
     overview:
       "Aegis Interlink is looking for a System Administrator to manage and maintain the servers, systems, and cloud infrastructure that keep our managed IT clients running smoothly. You will work across on-premise and cloud environments, with hands-on responsibility for both AWS and Azure resources.",
     responsibilities: [
